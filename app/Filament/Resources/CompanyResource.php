@@ -32,8 +32,9 @@ class CompanyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('cnpj')->searchable(),
+                Tables\Columns\TextColumn::make('created_at')->date()->sortable(),
             ])
             ->filters([
                 //

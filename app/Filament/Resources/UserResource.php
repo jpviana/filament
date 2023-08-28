@@ -39,7 +39,7 @@ class UserResource extends Resource
                             ->required()
                             ->maxLength(255),
                     ]),
-                Toggle::make('is_admin')
+                Toggle::make('is_admin')->label('Administrador')
                     ->disabled(!auth()->user())
             ]);
     }
