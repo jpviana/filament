@@ -50,8 +50,8 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('email')->searchable(),
-                IconColumn::make('is_admin')->label('Admin')
-                    ->boolean(),
+                Tables\Columns\IconColumn::make('is_admin')->label('Admin')->boolean(),
+                Tables\Columns\ToggleColumn::make('is_admin')->label('Admin'),
             ])
             ->filters([
                 //
