@@ -31,9 +31,10 @@ class PostResource extends Resource
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
-                    ->image(),
+                    ->disk('s3')
+                    ->directory('posts')
+                    ->visibility('private'),
                 Forms\Components\TextInput::make('video')
-                    ->maxLength(255),
             ]);
     }
 
@@ -43,7 +44,9 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\ImageColumn::make('image')
+                    ->disk('s3')
+                    ->circular(),
                 Tables\Columns\TextColumn::make('video')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -70,14 +73,14 @@ class PostResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -85,5 +88,5 @@ class PostResource extends Resource
             'create' => Pages\CreatePost::route('/create'),
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
-    }    
+    }
 }

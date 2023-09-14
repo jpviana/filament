@@ -29,9 +29,12 @@ class CustomerResource extends Resource
                         ->required()
                         ->maxLength(255),
                     Forms\Components\FileUpload::make('image')
-                        ->image(),
+                        ->disk('s3')
+                        ->directory('clientes')
+                        ->visibility('private'),
                     Forms\Components\Toggle::make('is_active')
-                        ->required(),
+                        ->required()
+                        ->default(true),
                     Forms\Components\Toggle::make('partner')
                         ->required(),
                 ]),
@@ -44,7 +47,9 @@ class CustomerResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\ImageColumn::make('image')
+                 ->disk('s3')
+                 ->circular(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\ToggleColumn::make('is_active'),

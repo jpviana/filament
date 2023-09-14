@@ -24,7 +24,9 @@ class BannerResource extends Resource
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('image')
-                    ->image(),
+                    ->disk('s3')
+                    ->directory('banners')
+                    ->visibility('private'),
             ]);
     }
 
@@ -32,8 +34,9 @@ class BannerResource extends Resource
     {
         return $table
             ->columns([
-
-                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\ImageColumn::make('image')
+                    ->disk('s3')
+                    ->circular(),
             ])
             ->filters([
                 //
