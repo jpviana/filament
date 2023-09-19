@@ -17,7 +17,9 @@ class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationLabel = 'Clientes';
+    protected static ?string $modelLabel = 'Cliente';
 
     public static function form(Form $form): Form
     {
@@ -26,16 +28,20 @@ class CustomerResource extends Resource
                 Forms\Components\Section::make([
 
                     Forms\Components\TextInput::make('name')
+                        ->label('Nome')
                         ->required()
                         ->maxLength(255),
                     Forms\Components\FileUpload::make('image')
                         ->disk('s3')
+                        ->label('Logo')
                         ->directory('clientes')
                         ->visibility('private'),
                     Forms\Components\Toggle::make('is_active')
                         ->required()
+                        ->label('Ativo')
                         ->default(true),
                     Forms\Components\Toggle::make('partner')
+                        ->label('Parceiro')
                         ->required(),
                 ]),
             ]);
@@ -46,16 +52,20 @@ class CustomerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nome')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image')
-                 ->disk('s3')
-                 ->circular(),
+                    ->label('Logo')
+                    ->disk('s3')
+                    ->circular(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
-                Tables\Columns\ToggleColumn::make('is_active'),
+                Tables\Columns\ToggleColumn::make('is_active')
+                    ->label('Ativo'),
                 Tables\Columns\IconColumn::make('partner')
                     ->boolean(),
-                Tables\Columns\ToggleColumn::make('partner'),
+                Tables\Columns\ToggleColumn::make('partner')
+                    ->label('Parceiro'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

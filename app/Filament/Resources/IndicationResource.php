@@ -17,7 +17,9 @@ class IndicationResource extends Resource
 {
     protected static ?string $model = Indication::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-user-group';
+    protected static ?string $navigationLabel = 'Indicações';
+    protected static ?string $modelLabel = 'Indicação';
 
     public static function form(Form $form): Form
     {

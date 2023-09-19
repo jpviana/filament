@@ -19,7 +19,9 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationLabel = 'Usuários';
+    protected static ?string $modelLabel = 'Usuário';
 
     public static function form(Form $form): Form
     {
@@ -28,17 +30,17 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')->label('Nome')->required(),
                 Forms\Components\TextInput::make('email')->email()->required(),
                 Forms\Components\TextInput::make('password')->label('Senha')->password()->required(),
-                Forms\Components\Select::make('company_id')->label('Empresa')->relationship('company', 'name')->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('cnpj')
-                            ->label('CNPJ')
-                            ->required()
-                            ->maxLength(255),
-                    ]),
+//                Forms\Components\Select::make('company_id')->label('Empresa')->relationship('company', 'name')->searchable()
+//                    ->preload()
+//                    ->createOptionForm([
+//                        Forms\Components\TextInput::make('name')
+//                            ->required()
+//                            ->maxLength(255),
+//                        Forms\Components\TextInput::make('cnpj')
+//                            ->label('CNPJ')
+//                            ->required()
+//                            ->maxLength(255),
+//                    ]),
                 Toggle::make('is_admin')->label('Administrador')
                     ->disabled(!auth()->user())
             ]);
